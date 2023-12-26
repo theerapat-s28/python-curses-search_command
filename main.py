@@ -1,6 +1,5 @@
 import curses, time
 from curses import wrapper
-
 from tools import word
 from core import common, settings, app
 from panel import footer, menu
@@ -41,7 +40,6 @@ def set_app_color() -> None:
   common.BLACK_AND_YELLOW = curses.color_pair(228)
   common.BLACK_AND_BLUE = curses.color_pair(70)
 
-
 def initialize(stdscr:curses.window) -> None:
   '''
   Description: Do initial things like set size, color.
@@ -49,76 +47,6 @@ def initialize(stdscr:curses.window) -> None:
   app.main_screen = stdscr;
   set_screen_size()
   set_app_color()
-
-
-def key_action(key:str) -> None:
-
-  scr = app.main_screen
-
-  #================================== On main page =============================
-  if common.actived_page == 0:
-    if key == 'h':
-      footer.update(scr, f'{key} is not set in page {common.actived_page}')
-    elif key == 'j':
-      common.actived_menu = common.actived_menu + 1
-      if common.actived_menu >= len(settings.MAIN_MENU): common.actived_menu = len(settings.MAIN_MENU) - 1
-      menu.update_main_menu(scr, common.actived_menu)
-      footer.update(scr, f'Actived page = {common.actived_page}, Actived menu = {common.actived_menu}, Last key = {key}')
-    elif key == 'k':
-      common.actived_menu = common.actived_menu - 1
-      if common.actived_menu < 0: common.actived_menu = 0
-      menu.update_main_menu(scr, common.actived_menu)
-      footer.update(scr, f'Actived page = {common.actived_page}, Actived menu = {common.actived_menu}, Last key = {key}')
-    elif key == 'l':
-      footer.update(scr, f'{key} is not set in page {common.actived_page}')
-    elif key == ' ':
-      common.actived_page = common.actived_menu
-      common.actived_menu = 0
-      menu.update_main_menu(scr, common.actived_menu)
-      footer.update(scr, f'Enter to Actived page {common.actived_page}')
-    elif key == 'q':
-      exit()
-    elif key == None:
-      pass
-    else:
-      footer.update(scr, f'{key} is not set in page {common.actived_page}')
-
-    return  # If not return here, it will process below code.
-  #=============================================================================
-
-  #================================== Other page ===============================
-  if common.actived_page != 0:
-    if key == 'h':
-      footer.update(scr, f'{key} is not set in page {common.actived_page}')
-    elif key == 'j':
-      common.actived_menu = common.actived_menu + 1
-      if common.actived_menu >= len(settings.MAIN_MENU): common.actived_menu = len(settings.MAIN_MENU) - 1
-      menu.update_main_menu(scr, common.actived_menu)
-      footer.update(scr, f'Actived page = {common.actived_page}, Actived menu = {common.actived_menu}, Last key = {key}')
-    elif key == 'k':
-      common.actived_menu = common.actived_menu - 1
-      if common.actived_menu < 0: common.actived_menu = 0
-      menu.update_main_menu(scr, common.actived_menu)
-      footer.update(scr, f'Actived page = {common.actived_page}, Actived menu = {common.actived_menu}, Last key = {key}')
-    elif key == 'l':
-      footer.update(scr, f'{key} is not set in page {common.actived_page}')
-    elif key == ' ':
-      footer.update(scr, f'Execute command [{common.actived_page}][{common.actived_menu}]')
-    elif key == 'q':
-      exit()
-    elif key == 'KEY_BACKSPACE':
-      common.actived_page = 0
-      common.actived_menu = 0
-      menu.update_main_menu(scr, common.actived_menu)
-      footer.update(scr, f'Go back to Actived page = {common.actived_page}')
-    elif key == None:
-      pass
-    else:
-      footer.update(scr, f'{key} is not set in page {common.actived_page}')
-
-    return
-  #=============================================================================
-
 
 
 def app_start() -> None:
