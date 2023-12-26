@@ -16,7 +16,7 @@ def _my_raw_input(window:curses.window, r, c, prompt_string):
   window.refresh() #      v reading input at next line
   input = window.getstr(r + 1, c, 3*ncols)
   curses.curs_set(0)
-  return input
+  return input.decode('utf-8')
 
 
 def render(questions:[str]) -> Union[List[str],None]:

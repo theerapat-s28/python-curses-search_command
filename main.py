@@ -1,4 +1,4 @@
-import curses, time
+import curses, time, sys
 from curses import wrapper
 from tools import word
 from core import common, settings, app

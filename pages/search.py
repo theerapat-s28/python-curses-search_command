@@ -57,6 +57,11 @@ class DescPad:
     self._origin = {'row': row_origin, 'col': col_origin}
     self._end = {'row': row_origin + nlines - 1, 'col': col_origin + ncols - 1}
 
+    self._tag_window = curses.newwin(
+      1, ncols, 
+      self._origin['row'] + nlines - 1, self._origin['col']
+    )
+
 
   def render(self, highlight_item_ided_command:str, style:int = curses.A_ITALIC) -> None:
     self._pad.clear()
@@ -74,9 +79,23 @@ class DescPad:
       self._end['row'], self._end['col']
     )
 
+  def render_tag(self, tag:str):
+    self._tag_window.clear()
+    if tag == 'Linux':
+      self._tag_window.addstr(tag, curses.A_BOLD | curses.color_pair(12))
+    elif tag == 'Fedora':
+      self._tag_window.addstr(tag, curses.A_BOLD | curses.color_pair(28))
+    elif tag == 'Ubuntu':
+      self._tag_window.addstr(tag, curses.A_BOLD | curses.color_pair(2))
+    self._tag_window.refresh()
+  
+
 class LiveProcessWindow():
   def __init__(self) -> None:
-    self._window = curses.newwin(common.terminal_height-4, 100, 1, 1)
+    self._window = curses.newwin(
+      common.terminal_height-2, 
+      common.terminal_width-1, 
+      1, 1)
 
   def clear_log_content(self):
     # Remove existing content in live process log file.
@@ -330,6 +349,8 @@ def render():
       desc_pad.render(filtered_commands[highlight_item_id])
     else:
       desc_pad.render("None")
+    # OS tag
+    desc_pad.render_tag(util.get_command_tag_by_name(filtered_commands[highlight_item_id]))
     # ===
 
     # == Update search box

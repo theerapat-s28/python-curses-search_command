@@ -7,6 +7,12 @@ def get_command_desc_by_name(target_name:str):
           return e['desc']
   return None  # Return None if the name is not found
 
+def get_command_tag_by_name(target_name:str):
+  for e in settings.COMMANDS:
+      if e['name'] == target_name:
+          return e['os']
+  return None  # Return None if the name is not found
+
 def get_command_questions_by_name(target_name:str):
   for e in settings.COMMANDS:
       if e['name'] == target_name:

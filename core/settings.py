@@ -26,78 +26,83 @@ MAX_COMMAND_DESC_LINES = 10000
 COMMANDS = [
   {
     'id': 0,
-    'name': 'Command 0',
-    'desc': 'This is description of command 0, In your specific case, where' +
-            ' you want to return the index, you can modify the code as needed.' +
-            'If the item is not found, you can return a specific value or ' +
-            'handle it in a way that fits your requirements.',
-    'func': linux_command.echo,
-    'questions': ['Text to echo is']
+    'name': 'Fedora - Check whether Wayland or X11 is being used',
+    'desc': "loginctl show-session $(loginctl|grep $(whoami) |awk '{print $1}') -p Type",
+    'func': linux_command.check_session,
+    'questions': [],
+    'os': 'Fedora'
   },
   {
     'id': 1,
-    'name': 'Command 1',
-    'desc': 'echo number 2',
-    'func': linux_command.echo2,
-    'questions': ['Text =', 'Text2 =']
+    'name': 'List samba shared folder',
+    'desc': 'smbclient -L ${ip} -N',
+    'func': linux_command.samba_list,
+    'questions': ['Samba ip server (Ex. 192.168.1.20 or samba.lan) '],
+    'os': 'Linux'
   },
   {
     'id': 2,
-    'name': 'Command 2',
-    'desc': 'Description of command 2',
-    'questions': []
+    'name': 'Echo world',
+    'desc': 'echo ${text} && echo ${text1}',
+    'func': linux_command.echo,
+    'questions': ['text 1 ', 'text 2 '],
+    'os': 'Linux'
   },
   {
     'id': 3,
     'name': 'Command 3',
     'desc': 'Description of command 3',
-    'questions': []
+    'questions': [],
+    'os': 'Ubuntu'
   },
   {
     'id': 4,
     'name': 'Command 4',
     'desc': 'Description of command 4',
-    'questions': []
+    'questions': [],
+    'os': 'Linux'
   },
     {
     'id': 5,
     'name': 'Command 5',
     'desc': 'Description of command 5',
-    'questions': []
+    'questions': [],
+    'os': 'Linux'
   },
   {
     'id': 6,
     'name': 'Command 6',
     'desc': 'Description of command 6',
-    'questions': []
+    'questions': [],
+    'os': 'Linux'
   },
   {
     'id': 7,
     'name': 'Command 7',
     'desc': 'Description of command 7',
-    'questions': []
+    'questions': [],
+    'os': 'Linux'
   },
   {
     'id': 8,
     'name': 'Command 8',
     'desc': 'Description of command 8',
-    'questions': []
+    'questions': [],
+    'os': 'Linux'
   }
   ,
   {
     'id': 9,
     'name': 'Command 9',
     'desc': 'Description of command 9',
-    'questions': []
+    'questions': [],
+    'os': 'Linux'
   },
   {
     'id': 10,
     'name': 'Command 10',
     'desc': 'Description of command 10',
-    'questions': []
+    'questions': [],
+    'os': 'Linux'
   }
 ]
-
-
-def command0():
-  pass
