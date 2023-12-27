@@ -91,6 +91,9 @@ class DescPad:
   
 
 class LiveProcessWindow():
+  '''
+  desc: window that show the output of subprocess in almost realtime.
+  '''
   def __init__(self) -> None:
     self._window = curses.newwin(
       common.terminal_height-2, 
@@ -160,7 +163,7 @@ class LiveProcessWindow():
 
     _pad = curses.newpad(len(contents)+2, max(2*common.terminal_width, 2*max_cols))
     _pad.addstr(contents_longstr)
-    _pad.addstr('    Done !!')
+    _pad.addstr(word.fill_space('Done !!', common.terminal_width-1, 4), curses.color_pair(3))
 
     num_lines, num_cols = _pad.getyx()
     num_lines_used_in_pad = num_lines + 1
@@ -310,7 +313,8 @@ def render():
     if search_text == '':
       filtered_commands = all_commands
     else:
-      filtered_commands = word.filter_by_keyword(all_commands, search_text)
+      include_words, exclude_words = word.extract_search_words(search_text)
+      filtered_commands = word.filter_array_by_keywords(all_commands, include_words, exclude_words)
 
     if len(filtered_commands) < 1:
       main_pad.addstr(
@@ -347,10 +351,10 @@ def render():
     # === Render highlighted command description
     if len(filtered_commands) > 0:
       desc_pad.render(filtered_commands[highlight_item_id])
+      # OS tag
+      desc_pad.render_tag(util.get_command_tag_by_name(filtered_commands[highlight_item_id]))
     else:
       desc_pad.render("None")
-    # OS tag
-    desc_pad.render_tag(util.get_command_tag_by_name(filtered_commands[highlight_item_id]))
     # ===
 
     # == Update search box

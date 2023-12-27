@@ -7,5 +7,5 @@ def samba_list(ip:str)->str:
   return f'smbclient -L {ip} -N'
 
 # Command id 2
-def echo(text, text1):
-  return f'echo {text} && echo {text1}'
+def fedora_crontab_status():
+  return f'systemctl status crond.service'

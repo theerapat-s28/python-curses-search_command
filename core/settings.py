@@ -42,11 +42,11 @@ COMMANDS = [
   },
   {
     'id': 2,
-    'name': 'Echo world',
-    'desc': 'echo ${text} && echo ${text1}',
-    'func': linux_command.echo,
-    'questions': ['text 1 ', 'text 2 '],
-    'os': 'Linux'
+    'name': 'Fedora - Check crontab status',
+    'desc': 'systemctl status crond.service',
+    'func': linux_command.fedora_crontab_status,
+    'questions': [],
+    'os': 'Fedora'
   },
   {
     'id': 3,
