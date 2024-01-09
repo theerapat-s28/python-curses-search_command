@@ -1,4 +1,4 @@
-import curses, subprocess, time
+import curses, subprocess, time, getpass
 from curses.textpad import Textbox, rectangle
 
 from core import app, common, settings
@@ -15,12 +15,12 @@ class Border:
   '''
 
   # Vertical Border
-  left = None
-  middle = None
-  right = None
+  left = 0
+  middle = 0
+  right = 0
   # Horizontal Border
-  top = None
-  bottom = None
+  top = 0
+  bottom = 0
 
 
   def __init__(self) -> None:
@@ -225,7 +225,7 @@ def update_footer(is_normal_mode:bool)->None:
     mode_status = 'Insert'
     footer.update(
       scr, 
-      '         Press "ESC" for normal mode.',
+      '         Press "ESC" twice(2x) for normal mode.',
       [
         [19, curses.color_pair(197) | curses.A_REVERSE],
         [20, curses.color_pair(197) | curses.A_REVERSE],
@@ -240,9 +240,7 @@ def update_footer(is_normal_mode:bool)->None:
     common.BLACK_AND_BLUE | curses.A_BOLD
   )
 
-def get_menu_showing_range(
-  highlight_item_id_id:int, min:int, max:int
-)->[int]:
+def get_menu_showing_range(highlight_item_id_id:int, min:int, max:int):
   # Scroll menu down
   if highlight_item_id_id > max:
     max = highlight_item_id_id
@@ -254,7 +252,7 @@ def get_menu_showing_range(
 
   return [min, max]
 
-def fetch_command_data(menu_pad:curses.window)->[]:
+def fetch_command_data(menu_pad:curses.window):
   all_commands = []
   filtered_commands = []
   for i, e in enumerate(settings.COMMANDS):
@@ -304,6 +302,9 @@ def render():
   while True:
     scr.clear()
     main_pad.clear()
+
+    username = getpass.getuser()
+    scr.addstr(border.top-1, border.left+1, f' {username} ', curses.color_pair(215))
 
     border.draw(scr)  # draw main border
     update_footer(normal_mode)  # update scr footer

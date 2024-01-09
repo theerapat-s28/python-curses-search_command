@@ -50,59 +50,34 @@ COMMANDS = [
   },
   {
     'id': 3,
-    'name': 'Command 3',
-    'desc': 'Description of command 3',
-    'questions': [],
-    'os': 'Ubuntu'
+    'name': 'Linux - create softlink',
+    'desc': 'ln -s ${target} ${location}',
+    'func': linux_command.create_softlink,
+    'questions': [
+      'Target directory (ex. /home/user/.config/nvim',
+      'Location of softlink(shortcut)'
+    ],
+    'os': 'Linux'
   },
   {
     'id': 4,
-    'name': 'Command 4',
-    'desc': 'Description of command 4',
-    'questions': [],
+    'name': 'Linux - remove softlink',
+    'desc': 'unlink ${target_link}',
+    'func': linux_command.unlink_softlink,
+    'questions': ['Softlink location (ex. /home/user/.config/nvim'],
     'os': 'Linux'
   },
-    {
+  {
     'id': 5,
-    'name': 'Command 5',
-    'desc': 'Description of command 5',
-    'questions': [],
+    'name': 'Linux - make folder sudoers permission for all scripts inside',
+    'desc': 'This will make all scripts inside folder and all sub folder to have '
+            + 'sudo permission (execute "sudo" command without asking password)\n'
+            + 'Command Steps: \n'
+            + '1. Check if there is duplicate name of permission in /etc/sudoers.d/${dir}\n'
+            + '2. Create permisssion /etc/sudoers.d/${dir}\n'
+            + '3. List all dir and sub dirs and write permission to above file\n',
+    'func': linux_command.make_sudoer_permission,
+    'questions': ['Username', 'Directory (ex. /home/user/02-scripts'],
     'os': 'Linux'
   },
-  {
-    'id': 6,
-    'name': 'Command 6',
-    'desc': 'Description of command 6',
-    'questions': [],
-    'os': 'Linux'
-  },
-  {
-    'id': 7,
-    'name': 'Command 7',
-    'desc': 'Description of command 7',
-    'questions': [],
-    'os': 'Linux'
-  },
-  {
-    'id': 8,
-    'name': 'Command 8',
-    'desc': 'Description of command 8',
-    'questions': [],
-    'os': 'Linux'
-  }
-  ,
-  {
-    'id': 9,
-    'name': 'Command 9',
-    'desc': 'Description of command 9',
-    'questions': [],
-    'os': 'Linux'
-  },
-  {
-    'id': 10,
-    'name': 'Command 10',
-    'desc': 'Description of command 10',
-    'questions': [],
-    'os': 'Linux'
-  }
 ]

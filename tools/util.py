@@ -1,5 +1,5 @@
 from core import settings
-
+import random, string
 
 def get_command_desc_by_name(target_name:str):
   for e in settings.COMMANDS:
@@ -41,3 +41,9 @@ def get_key_by_keyword(obj, keyword):
         if keyword in values:
             return key
     return None  # Return None if the keyword is not found in any values
+
+
+def generate_random_4_digit():
+    # Generate a random 4-digit string
+    random_digits = ''.join(random.choices(string.digits, k=4))
+    return random_digits
