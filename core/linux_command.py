@@ -54,3 +54,14 @@ def make_sudoer_permission(username:str, path:str)->str:
 
     return command
 
+# Command id 6
+def dnf_history_list() -> str:
+  return f'dnf history'
+
+# Command id 7
+def dnf_rollback(id:int) -> str:
+  return f'dnf history rollback {id}'
+
+# Command id 8
+def dnf_undo(id:int) -> str:
+  return f'dnf history undo {id}'

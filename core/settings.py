@@ -80,4 +80,37 @@ COMMANDS = [
     'questions': ['Username', 'Directory (ex. /home/user/02-scripts'],
     'os': 'Linux'
   },
+  {
+    'id': 6,
+    'name': 'Fedora - Show dnf history',
+    'desc': 'List history of dnf command with id. \n  dnf history',
+    'func': linux_command.dnf_history_list,
+    'questions': [],
+    'os': 'Fedora'
+  },
+  {
+    'id': 7,
+    'name': 'Fedora - Roll back dnf commands',
+    'desc': 'Rollback dnf command to specific id. \n'
+            + '  14 | install wget \n'
+            + '  13 | install unzip \n'
+            + '  12 | install vim-X11\n\n'
+            + 'With command `dnf history rollback 12` This action uninstalls '
+            + 'the wget and unzip packages but leaves the vim-X11 package installed.',
+    'func': linux_command.dnf_rollback,
+    'questions': ['Rollback id'],
+    'os': 'Fedora'
+  },{
+    'id': 8,
+    'name': 'Fedora - Undo dnf commands',
+    'desc': 'Undo dnf command to specific id. \n'
+            + '  14 | install wget \n'
+            + '  13 | install unzip \n'
+            + '  12 | install vim-X11\n\n'
+            + 'With command `dnf history undo 12` This action uninstalls '
+            + '`vim-X11` package only.',
+    'func': linux_command.dnf_rollback,
+    'questions': ['Rollback id'],
+    'os': 'Fedora'
+  },
 ]
